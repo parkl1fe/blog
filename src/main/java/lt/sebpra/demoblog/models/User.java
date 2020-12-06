@@ -1,25 +1,46 @@
 package lt.sebpra.demoblog.models;
 
-import javax.persistence.*;
-import java.util.UUID;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
+@Setter
+@Getter
 public class User {
 
     @Id
-    @GeneratedValue
-    @Column(name = "user_id")
-    private UUID userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long userId;
 
-    @Column(name = "user_name")
+    @OneToMany(mappedBy = "user")
+    private Set<Article> articles;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Comment> comments;
+
+    @Column(name = "avatar")
+    private String avatar;
+
+    @Column(name = "username")
     private String userName;
 
-    @Column(name = "user_password")
+    @Column(name = "password")
     private String userPassword;
 
     @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private Role role;
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
+    private String role;
 
 }
