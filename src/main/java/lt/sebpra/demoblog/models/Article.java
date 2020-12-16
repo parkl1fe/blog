@@ -1,6 +1,6 @@
 package lt.sebpra.demoblog.models;
 
-import java.util.Set;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,11 +32,12 @@ public class Article {
     @JoinColumn(name="user_id", referencedColumnName = "id", nullable=false)
     private User user;
 
-    @OneToMany(mappedBy = "article")
-    private Set<Comment> comments;
-
-    @OneToOne(mappedBy = "article")
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="article_stats_id", referencedColumnName = "id", nullable=false)
     private ArticleStats articleStats;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Comment> comments;
 
     @Column(name = "created")
     private Timestamp created;
@@ -44,10 +45,10 @@ public class Article {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 500)
     private String description;
 
-    @Column(name = "content")
+    @Column(name = "content", length = 5000)
     private String content;
 
 }

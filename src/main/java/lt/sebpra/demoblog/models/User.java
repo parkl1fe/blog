@@ -23,12 +23,6 @@ public class User {
     @Column(name = "id")
     private Long userId;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Article> articles;
-
-    @OneToMany(mappedBy = "user")
-    private Set<Comment> comments;
-
     @Column(name = "avatar")
     private String avatar;
 
@@ -39,8 +33,6 @@ public class User {
     private String userPassword;
 
     @Column(name = "role")
-//    @Enumerated(EnumType.STRING)
-//    private Role role;
     private String role;
 
 }
