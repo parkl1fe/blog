@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ArticleController {
-    private static String  TEMP_PATH = "src/main/resources/static/images/user/image/";
+    private static String  TEMP_PATH = System.getProperty("user.dir") + "/uploads/image/";
 
 
     private ArticleService articleService;

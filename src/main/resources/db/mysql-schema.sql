@@ -15,6 +15,7 @@ CREATE TABLE `article` (
                            `id` bigint PRIMARY KEY AUTO_INCREMENT,
                            `user_id` bigint NOT NULL,
                            `created` timestamp NOT NULL,
+                           `image_name` varchar(255) NOT NULL,
                            `title` varchar(255) NOT NULL,
                            `description` text NOT NULL,
                            `content` text NOT NULL

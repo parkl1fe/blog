@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "article")
@@ -39,6 +40,10 @@ public class Article {
     @OneToMany(cascade=CascadeType.ALL)
     private List<Comment> comments;
 
+    @Column(name = "image_name")
+    private String imageName;
+
+    @CreationTimestamp
     @Column(name = "created")
     private Timestamp created;
 

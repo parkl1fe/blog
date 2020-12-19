@@ -24,7 +24,9 @@
         <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
                 <strong>YOUDSY</strong>
-                <img th:src="@{/images/logo.png}" alt="logo" width="65" height="35"/>
+                <a th:href="@{/}">
+                    <img th:src="@{/images/logo.png}" alt="logo" width="65" height="35"/>
+                </a>
             </div>
             <div class="col-4 text-center">
                 <a class="blog-header-logo text-dark" href="#">Large</a>
@@ -87,7 +89,7 @@
         <div class="card-group">
             <th:block th:if="${articles.getContent().size > 1}" >
                 <div class="card">
-                    <img th:src="@{/images/user/image/Hero.jpg}" class="card-img-top" alt="...">
+                    <img th:src="@{/uploads/image/{file}(file=${articles.getContent().get(1).imageName})}" class="card-img-top" alt="image">
                     <div class="card-body">
                         <h5 th:text="${articles.getContent().get(1).title}" class="card-title">Title</h5>
                         <p th:text="${articles.getContent().get(1).description}" class="card-text">Description</p>
@@ -98,7 +100,7 @@
             </th:block>
             <th:block th:if="${articles.getContent().size > 2}">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img th:src="@{/uploads/image/{file}(file=${articles.getContent().get(2).imageName})}" class="card-img-top" alt="image">
                     <div class="card-body">
                         <strong th:text="${articles.getContent().get(2).user.userName}"></strong>
                         <h5 th:text="${articles.getContent().get(2).title}" class="card-title">Title</h5>
@@ -110,7 +112,7 @@
             </th:block>
             <th:block th:if="${articles.getContent().size > 3}">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img th:src="@{/uploads/image/{file}(file=${articles.getContent().get(3).imageName})}" class="card-img-top" alt="image">
                     <div class="card-body">
                         <strong th:text="${articles.getContent().get(3).user.userName}"></strong>
                         <h5 th:text="${articles.getContent().get(3).title}" class="card-title">Title</h5>
