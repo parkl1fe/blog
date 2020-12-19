@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ArticleController {
-    private static String  TEMP_PATH = System.getProperty("user.dir") + "/uploads/image/";
+    private static String UPLOAD_PATH = System.getProperty("user.dir") + "/uploads/image/";
 
 
     private ArticleService articleService;
@@ -31,23 +31,32 @@ public class ArticleController {
     @GetMapping()
     public String getAllArticles(@PageableDefault(sort = "articleStats.score", direction = Direction.DESC) Pageable pageable, Model model) {
         model.addAttribute("articles", articleService.getAll(pageable));
+
         return "front-page";
     }
 
     @GetMapping("/{username}")
-    public String getAllArticlesByUser(@PathVariable String username, @PageableDefault(sort = "articleStats.score", direction = Direction.DESC) Pageable pageable, Model model) {
+    public String getAllArticlesByUser(@PathVariable String username,
+                                       @PageableDefault(sort = "articleStats.score",
+                                               direction = Direction.DESC) Pageable pageable, Model model) {
+
         model.addAttribute("articles", articleService.getAllByUser(username, pageable));
+        model.addAttribute("acc", username.toUpperCase());
+
         return "user-articles-page";
     }
 
     @GetMapping("/{username}/article/{id}")
     public String getUserArticle(@PathVariable String username, @PathVariable Long id,  Model model) {
         model.addAttribute("article", articleService.getArticle(username, id));
+        model.addAttribute("acc", username.toUpperCase());
+
         return "single-article-page";
     }
 
     @GetMapping("/article")
     public String getArticleForm() {
+
         return "article-form-page";
     }
 
@@ -62,7 +71,7 @@ public class ArticleController {
 
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(TEMP_PATH + file.getOriginalFilename());
+            Path path = Paths.get(UPLOAD_PATH + file.getOriginalFilename());
             Files.write(path, bytes);
 
 //            redirectAttributes.addFlashAttribute("message",
