@@ -72,7 +72,6 @@
         </div>
     </th:block>
 
-    <!--    FOR EACH -->
     <th:block th:if="${articles.getContent().size > 0}">
         <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
             <div class="col-md-6 px-0">
@@ -84,11 +83,11 @@
     </th:block>
 
 
-    <th:block th:if="${articles.getContent().size > 2}">
+    <th:block th:if="${articles.getContent().size > 1}">
         <div class="card-group">
             <th:block th:if="${articles.getContent().size > 1}" >
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img th:src="@{/images/user/image/Hero.jpg}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 th:text="${articles.getContent().get(1).title}" class="card-title">Title</h5>
                         <p th:text="${articles.getContent().get(1).description}" class="card-text">Description</p>
