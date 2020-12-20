@@ -29,7 +29,7 @@
 </table>
 
 <!--Pagination-->
-<nav th:fragment="pagination(articles)" th:if="${articles.hasNext()}">
+<nav th:fragment="pagination(articles)" th:if="${articles.hasNext() || articles.hasPrevious()}">
     <ul class="pagination">
         <li class="page-item" th:classappend="${articles.getNumber == 0 ? 'disabled' : ''}">
             <a class="page-link"

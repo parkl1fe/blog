@@ -1,5 +1,6 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <!--Head-->
 <head th:replace="fragments/common.html :: head"></head>
@@ -16,8 +17,9 @@
         th:with="homeUrl='/',
                  home=#{nav.home},
                  userUrl='/'+ ${article.user.userName},
+                 userName=${article.user.userName},
                  articleName=${article.title.toUpperCase()}">
-        <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}, {name:acc, url:userUrl}, {name:articleName} }})}" ></div>
+        <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}, {name:userName, url:userUrl}, {name:articleName} }})}" ></div>
     </th:block>
 
 </div>

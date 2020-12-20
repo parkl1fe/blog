@@ -12,16 +12,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "article")
 @Setter
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Article {
 
     @Id
@@ -37,15 +42,12 @@ public class Article {
     @JoinColumn(name="article_stats_id", referencedColumnName = "id", nullable=false)
     private ArticleStats articleStats;
 
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<Comment> comments;
-
     @Column(name = "image_name")
     private String imageName;
 
     @CreationTimestamp
     @Column(name = "created")
-    private Timestamp created;
+    private java.sql.Timestamp created;
 
     @Column(name = "title")
     private String title;
