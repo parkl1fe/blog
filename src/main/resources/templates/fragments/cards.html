@@ -48,7 +48,7 @@
             <img th:src="@{images/noContent.gif}">
             <h2 class="card-title text-center" th:text="#{info.nocontent}"></h2>
             <div class="d-flex justify-content-center">
-                <form th:action="@{/article}" method="get">
+                <form th:action="@{/article/new}" method="get">
                     <button class="btn btn-outline-info" th:text="#{button.click.here.to.add}" type="submit"></button>
                 </form>
             </div>

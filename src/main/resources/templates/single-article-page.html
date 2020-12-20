@@ -22,6 +22,11 @@
         <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}, {name:userName, url:userUrl}, {name:articleName} }})}" ></div>
     </th:block>
 
+    <div class="d-grid gap-1">
+        <a th:href="@{/{username}/article/{id}/edit(username=${article.user.getUserName()}, id=${article.id})}" th:text="#{button.edit.article}" class="btn btn-info btn-lg fw-bold fs-2 text"></a>
+        <a th:href="@{/{username}/article/{id}/delete(username=${article.user.getUserName()}, id=${article.id})}" th:text="#{button.delete.article}" class="btn btn-info btn-lg fw-bold fs-2 text"></a>
+    </div>
+
 </div>
 
 <main class="container">

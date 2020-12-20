@@ -1,9 +1,5 @@
 package lt.sebpra.demoblog.controllers;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import lt.sebpra.demoblog.models.Article;
 import lt.sebpra.demoblog.servicies.ArticleService;
 import org.springframework.data.domain.Pageable;
@@ -16,9 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ArticleController {
@@ -48,35 +42,50 @@ public class ArticleController {
     }
 
     @GetMapping("/{username}/article/{id}")
-    public String getUserArticle(@PathVariable String username, @PathVariable Long id,  Model model) {
+    public String getUserArticle(@PathVariable String username, @PathVariable long id,  Model model) {
         model.addAttribute("article", articleService.getArticle(username, id));
 
         return "single-article-page";
     }
 
-    @GetMapping("/article")
+    @GetMapping("/article/new")
     public String getArticleForm(Model model) {
-//        TODO hardcoded for now p.s. upercase later
+//        TODO hardcoded for now p.s. uppercase later
         model.addAttribute("acc", "RAJ");
         model.addAttribute("article", new Article());
 
-        return "forms/article-form-page";
+        return "new-article-form";
     }
 
     @PostMapping("/article/upload")
     public String uploadArticle(@ModelAttribute("article") Article article, @ModelAttribute("file") MultipartFile file, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
 
-            return "forms/article-form-page";
+            return "forms/new-article-form";
         }
-        articleService.saveNewArticle(article, file);
+        long newArticleId = articleService.saveNewArticle(article, file).getId();
 
         //        TODO hardcoded for now
-        return "redirect:/raj";
+        return "redirect:/raj/article/" + newArticleId;
     }
 
+    @GetMapping("/{username}/article/{id}/edit")
+    public String getEditForm(@PathVariable String username, @PathVariable long id, Model model) {
+        model.addAttribute("article", articleService.getArticle(username, id));
 
+        return "forms/edit-article-form";
+    }
 
+    @PostMapping("/{username}/article/{id}/edit")
+    public String updateProductName(@PathVariable String username, @PathVariable long id, @ModelAttribute("article") Article article) {
+        articleService.updateArticle(article);
+        return "redirect:/" + username + "/article/" + id;
+    }
 
+    @GetMapping("/{username}/article/{id}/delete")
+    public String deleteProductName(@PathVariable String username, @PathVariable long id) {
+        articleService.deleteArticle(articleService.getArticle(username, id));
+        return "redirect:/" + username;
+    }
 
 }

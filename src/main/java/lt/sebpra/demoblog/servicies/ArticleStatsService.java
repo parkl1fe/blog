@@ -22,4 +22,9 @@ public class ArticleStatsService {
                         .views(0)
                         .build());
     }
+
+    @Transactional
+    public void deleteArticleStats(Long articleId) {
+        articleStatsRepository.deleteById(articleId);
+    }
 }

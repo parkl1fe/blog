@@ -34,11 +34,11 @@ public class Article {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id", nullable=false)
     private User user;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="article_stats_id", referencedColumnName = "id", nullable=false)
     private ArticleStats articleStats;
 

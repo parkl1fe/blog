@@ -1,6 +1,5 @@
 package lt.sebpra.demoblog.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,11 +24,11 @@ public class Comment {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(cascade= CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="article_id", referencedColumnName = "id", nullable=false)
     private Article article;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id", nullable=false)
     private User user;
 
