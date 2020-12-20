@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<!--Card Goup For Articles-->
+<div th:fragment="cardGroup(articles)" class="card-group">
+    <!--Skips first element and remove above 3-->
+    <div th:each="article,i : ${articles}" th:if="${i.index > 0 && i.index < 3}" class="card">
+        <img th:src="@{/uploads/image/{file}(file=${article.imageName})}" class="card-img-top" alt="image">
+        <div class="card-body">
+            <h5 th:text="${article.title}" class="card-title">Title</h5>
+            <p th:text="${article.description}" class="card-text">Description</p>
+            <a href="#" th:text="#{continue.reading}" class="stretched-link">Continue reading</a>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+</div>
+
+<!--Top Article Card-->
+<div th:fragment="topArticle(article)" class="d-flex flex-row p-4 p-md-5 mb-4 text-white rounded bg-dark">
+    <div class="col-md-6 px-0">
+        <h1 th:text="${article.title}" class="display-4 font-italic">Title</h1>
+        <p th:text="${article.description}" class="lead my-3">Description</p>
+        <p th:text="#{continue.reading}" class="lead mb-0">
+            <a href="#" class="text-white fw-bold"></a>
+        </p>
+    </div>
+    <div class="col-md-6 px-0">
+        <img th:src="@{/uploads/image/{file}(file=${article.imageName})}" class="card-img-top" alt="image">
+    </div>
+</div>
+
+<!--Single Article Card-->
+<div th:fragment="singleCard(article)" class="card">
+    <img th:src="@{/uploads/image/{file}(file=${article.imageName})}" class="card-img-top" alt="image">
+    <div class="card-body">
+        <strong th:text="${article.user.userName}"></strong>
+        <h5 th:text="${article.title}" class="card-title">Title</h5>
+        <p th:text="${article.getContent()}" class="card-text">Description</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+</div>
+
+<!--No Content Card-->
+<div th:fragment="noContent" class="container">
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+        <div class="col-md-auto">
+            <img th:src="@{images/noContent.gif}">
+            <h2 class="card-title text-center" th:text="#{info.nocontent}"></h2>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-outline-info" th:text="#{button.click.here.to.add}"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</html>
+
+
+
+

@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!--Article table-->
+<table th:fragment="articleTable(articles)" class="table">
+    <thead>
+    <tr>
+        <th th:text="#{table.header.score}" scope="col">Score</th>
+        <th th:text="#{table.header.title} "scope="col">Title</th>
+        <th th:text="#{table.header.author} "scope="col">Author</th>
+        <th scope="col">Handle</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="article : ${articles}">
+        <th scope="row">Rank</th>
+        <td>
+            <a th:href="@{/{user}/article/{id}(user=${article.user.userName}, id=${article.id})}" th:text="${article.title}" ></a>
+            <span th:text="article.c" class="badge bg-primary rounded-pill ms-1"></span>
+        </td>
+        <td>
+            <a th:href="@{/{user}(user=${article.user.userName})}" th:text="${article.user.userName}" ></a>
+        </td>
+        <td>@mdo</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<!--Pagination-->
+<nav th:fragment="pagination(articles)" th:if="${articles.getNumber != 0}">
+    <ul class="pagination">
+        <p th:text="${articles.}"></pth>
+        <li class="page-item" th:classappend="${articles.getNumber == 0 ? 'disabled' : ''}">
+            <a class="page-link"
+               th:href="@{?(page=${articles.hasPrevious ? articles.previousPageable.getPageNumber : articles.getNumber})}"
+               aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span th:text="#{nav.next}" class="sr-only">Previous</span>
+            </a>
+        </li>
+        <th:block th:each="pageNumber : ${#numbers.sequence(1, articles.totalPages)}">
+            <li class="page-item" th:classappend="${pageNumber == articles.getNumber + 1 ? 'active' : ''}">
+                <a class="page-link"
+                   th:href="@{/(page=${pageNumber -1}, size=${articles.size})}"
+                   th:text="${pageNumber}"></a>
+            </li>
+        </th:block>
+        <li th:classappend="${articles.totalPages == articles.getNumber() + 1 ? 'disabled' : ''}" class="page-item">
+            <a class="page-link"
+               th:href="@{?(page=${articles.hasNext ? articles.nextPageable.getPageNumber : articles.getNumber})}"
+               aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span th:text="#{nav.next}" class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
+
+
+
+</html>
+
+
+
+
+
+
+
+
+

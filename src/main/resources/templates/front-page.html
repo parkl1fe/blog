@@ -10,97 +10,38 @@
     <header th:replace="fragments/common.html :: header"></header>
 
     <!--Breadcrumb-->
-<!--    <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:'HOME', url:'/'}} )}" ></div>-->
+    <th:block
+            th:with="homeUrl='/',
+                 home=#{nav.home}">
+        <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}}})}" ></div>
+    </th:block>
 
 </div>
 
 <main class="container">
 
-    <!--    FOR EACH -->
-    <th:block th:if="${articles.getContent().size > 0}">
-        <div class="d-flex flex-row p-4 p-md-5 mb-4 text-white rounded bg-dark">
-            <div class="col-md-6 px-0">
-                <h1 th:text="${articles.getContent().get(0).title}" class="display-4 font-italic">Title</h1>
-                <p th:text="${articles.getContent().get(0).description}" class="lead my-3">Description</p>
-                <p th:text="#{continue.reading}" class="lead mb-0"><a href="#" class="text-white fw-bold"></a></p>
-            </div>
-            <div class="col-md-6 px-0">
-                <img th:src="@{/uploads/image/{file}(file=${articles.getContent().get(0).imageName})}" class="card-img-top" alt="image">
-            </div>
-        </div>
+    <th:block th:if="${articles.isEmpty()}">
+        <!--No Content Card-->
+        <div th:replace="fragments/cards.html :: noContent"></div>
     </th:block>
 
+    <th:block th:if="${articles.getContent().size > 0}">
+        <!--Top Article Card-->
+        <div th:replace="fragments/cards.html :: topArticle(${articles.getContent().get(0)})"></div>
+    </th:block>
 
     <th:block th:if="${articles.getContent().size > 2}">
-        <div class="card-group">
-            <th:block th:if="${articles.getContent().size > 1}" >
-                <div class="card">
-                    <img th:src="@{/uploads/image/{file}(file=${articles.getContent().get(1).imageName})}" class="card-img-top" alt="image">
-                    <div class="card-body">
-                        <strong th:text="${articles.getContent().get(1).user.userName}"></strong>
-                        <h5 th:text="${articles.getContent().get(1).title}" class="card-title">Title</h5>
-                        <p th:text="${articles.getContent().get(1).description}" class="card-text">Description</p>
-                        <a href="#" th:text="#{continue.reading}" class="stretched-link">Continue reading</a>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </th:block>
-            <th:block th:if="${articles.getContent().size > 2}">
-                <div class="card">
-                    <img th:src="@{/uploads/image/{file}(file=${articles.getContent().get(2).imageName})}" class="card-img-top" alt="image">
-                    <div class="card-body">
-                        <strong th:text="${articles.getContent().get(2).user.userName}"></strong>
-                        <h5 th:text="${articles.getContent().get(2).title}" class="card-title">Title</h5>
-                        <p th:text="${articles.getContent().get(2).description}" class="card-text">Description</p>
-                        <a href="#" th:text="#{continue.reading}" class="stretched-link">Continue reading</a>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </th:block>
-            <th:block th:if="${articles.getContent().size > 3}">
-                <div class="card">
-                    <img th:src="@{/uploads/image/{file}(file=${articles.getContent().get(3).imageName})}" class="card-img-top" alt="image">
-                    <div class="card-body">
-                        <strong th:text="${articles.getContent().get(3).user.userName}"></strong>
-                        <h5 th:text="${articles.getContent().get(3).title}" class="card-title">Title</h5>
-                        <p th:text="${articles.getContent().get(3).description}" class="card-text">Description</p>
-                        <a href="#" th:text="#{continue.reading}" class="stretched-link">Continue reading</a>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </th:block >
-        </div>
+        <!--Article Cards-->
+        <div th:replace="fragments/cards.html :: cardGroup(${articles})"></div>
     </th:block>
-
-
 
     <th:block th:if="${!articles.isEmpty()}">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Rank</th>
-                <th scope="col">Title</th>
-                <th scope="col">Author</th>
-                <th scope="col">Handle</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <tr th:each="article : ${articles}">
-                <th scope="row">Rank</th>
-                <td>
-                    <a th:href="@{/{user}/article/{id}(user=${article.user.userName}, id=${article.id})}" th:text="${article.title}" ></a>
-                </td>
-                <td>
-                    <a th:href="@{/{user}(user=${article.user.userName})}" th:text="${article.user.userName}" ></a>
-                </td>
-                <td>@mdo</td>
-            </tr>
-
-            </tbody>
-        </table>
+        <!--Table Of Articles-->
+        <table th:replace="fragments/table.html :: articleTable(${articles})"></table>
     </th:block>
 
+    <!--Pagination-->
+    <nav th:replace="fragments/table.html :: pagination(${articles})" ></nav>
 
 </main>
 
