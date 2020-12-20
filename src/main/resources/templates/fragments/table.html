@@ -14,7 +14,7 @@
     <tbody>
 
     <tr th:each="article : ${articles}">
-        <th scope="row">Rank</th>
+        <td th:text="${article.articleStats.score}"></td>
         <td>
             <a th:href="@{/{user}/article/{id}(user=${article.user.userName}, id=${article.id})}" th:text="${article.title}" ></a>
             <span th:text="article.c" class="badge bg-primary rounded-pill ms-1"></span>
@@ -29,9 +29,8 @@
 </table>
 
 <!--Pagination-->
-<nav th:fragment="pagination(articles)" th:if="${articles.getNumber != 0}">
+<nav th:fragment="pagination(articles)" th:if="${articles.hasNext()}">
     <ul class="pagination">
-        <p th:text="${articles.}"></pth>
         <li class="page-item" th:classappend="${articles.getNumber == 0 ? 'disabled' : ''}">
             <a class="page-link"
                th:href="@{?(page=${articles.hasPrevious ? articles.previousPageable.getPageNumber : articles.getNumber})}"
@@ -58,17 +57,4 @@
     </ul>
 </nav>
 
-
-
-
-
 </html>
-
-
-
-
-
-
-
-
-
