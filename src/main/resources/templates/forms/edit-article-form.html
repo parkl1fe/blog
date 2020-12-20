@@ -21,9 +21,9 @@
         <th:block
                 th:with="homeUrl='/',
                      home=#{nav.home},
-                     userUrl='/'+ ${acc},
-                     userName=${acc},
-                     currentPage=#{info.new.article}">
+                     userUrl='/'+ ${article.user.userName},
+                     userName=${article.user.userName},
+                     currentPage=#{info.edit.article}">
             <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}, {name:userName, url:userUrl}, {name:currentPage}}})}" ></div>
         </th:block>
     </div>
@@ -32,37 +32,38 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="well well-sm">
-                    <form class="form-horizontal" method="POST" th:action="@{/article/upload}" th:object="${article}" enctype="multipart/form-data">
-                        <fieldset>
-                            <legend class="text-center header" th:text="#{info.new.article}"></legend>
-
+                    <form class="" method="POST" th:action="@{/{username}/article/{id}/edit(username=${article.user.userName}, id=${article.id})}" th:object="${article}">
+                        <div class="form-row">
                             <div class="form-group">
                                 <div class="col-md-8">
-                                    <input id="title" name="title" type="text" th:placeholder="#{form.title}" class="form-control">
+                                    <legend class="text-center header" th:text="#{info.edit.article}"></legend>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-8">
-                                    <input id="description" name="description" type="text" th:placeholder="#{form.description}" class="form-control">
+                                    <label class="fw-bold" for="title" th:text="#{form.title} + ':'"></label>
+                                    <input id="title" name="title" type="text" th:value="*{title}" th:field="*{title}" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-8">
-                                    <input id="file" name="file" type="file" th:placeholder="#{form.upload}" class="form-control">
+                                    <label class="fw-bold" for="description" th:text="#{form.description} + ':'"></label>
+                                    <input id="description" name="description" type="text" th:value="*{description}" th:field="*{description}" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-8">
-                                    <textarea class="form-control" id="content" name="content" th:placeholder="#{form.content}" rows="7"></textarea>
+                                    <label class="fw-bold" for="content" th:text="#{form.content} + ':'"></label>
+                                    <textarea class="form-control" id="content" name="content" th:value="*{content}" th:field="*{content}" rows="7"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <br>
-                                <div class="col-md-12 text-center">
+                                <div class="col-md-8 text-center">
                                     <button type="submit" th:text="#{button.submit}" class="btn btn-primary btn-lg"></button>
                                 </div>
                             </div>
-                        </fieldset>
+                        </div>
                     </form>
                 </div>
             </div>

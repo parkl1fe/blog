@@ -54,7 +54,7 @@ public class ArticleController {
         model.addAttribute("acc", "RAJ");
         model.addAttribute("article", new Article());
 
-        return "new-article-form";
+        return "forms/new-article-form";
     }
 
     @PostMapping("/article/upload")
