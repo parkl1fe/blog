@@ -18,6 +18,10 @@
                  home=#{nav.home}">
         <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}, {name:acc}}})}" ></div>
     </th:block>
+
+    <div class="d-grid">
+        <a th:href="@{/article}" th:text="#{button.new.article}" class="btn btn-info btn-lg fw-bold fs-2 text"></a>
+    </div>
 </div>
 
 <main class="container">
