@@ -3,6 +3,7 @@ package lt.sebpra.demoblog.controllers;
 import lt.sebpra.demoblog.models.User;
 import lt.sebpra.demoblog.servicies.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,8 @@ public class UserController {
     }
 
     @GetMapping("/user/login")
-    public String getLoginForm(){
+    public String getLoginForm(Model model){
+        model.addAttribute("user", new User());
         return "forms/login-form";
     }
 
