@@ -1,8 +1,8 @@
 INSERT INTO user (id, avatar, username, password) VALUES
-                 (1,  'none', 'Raj',    'rrr'),
-                 (2,  'none', 'Sheldon','sss'),
-                 (3,  'none', 'Howard', 'hhh'),
-                 (4,  'bone', 'Leonard','lll');
+                 (1,  'none', 'Raj',    '{bcrypt}$2y$12$TljsjuXvl2T8B1T72hblDu3KJEvhpFc7ly6hcf1cEUAHVuvyGpmU2'),
+                 (2,  'none', 'Sheldon','{bcrypt}$2y$12$c142LNV2unddDJ4XpRTfcuS3K2SPuJSQk/H07s0ErlWMeAlhfYgIW'),
+                 (3,  'none', 'Howard', '{bcrypt}$2y$12$exKfHxlPmrATJ675JHqJLuSKYS77foUzq6rYgT6Pfuudnve2j9ori'),
+                 (4,  'none', 'Leonard','{bcrypt}$2y$12$xJ8eHt1Nk.8wTxyMubsD4.f8xL/kYb0fYL5c8oKMLbV25RR6EVvhu');
 
 INSERT INTO role (id, role_name) VALUES
 (1,  'USER'),
