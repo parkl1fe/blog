@@ -10,10 +10,19 @@ Codeacademy homework assignment.
 
 ## Running
 
+Package project at project root dir
+```
+mvn clean package
+```
 Run docker command at project root dir
 ```
 docker-compose up
 ```
+Run Application  at project root dir
+```
+mvn spring-boot:run
+```
+
 ## Built With
 
 * [Springboot MVC](https://docs.spring.io/spring-framework/docs/current/reference/html/web.html) - Java framework
