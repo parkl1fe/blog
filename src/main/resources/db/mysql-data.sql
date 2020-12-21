@@ -1,10 +1,21 @@
-INSERT INTO user (avatar, username, password, role) VALUES
-                 ('none', 'Raj',    'rrr',    'ADMIN'),
-                 ('none', 'Sheldon','sss',    'USER'),
-                 ('none', 'Howard', 'hhh',    'USER'),
-                 ('bone', 'Leonard','lll',    'USER');
+INSERT INTO user (id, avatar, username, password) VALUES
+                 (1,  'none', 'Raj',    'rrr'),
+                 (2,  'none', 'Sheldon','sss'),
+                 (3,  'none', 'Howard', 'hhh'),
+                 (4,  'bone', 'Leonard','lll');
 
-INSERT INTO article_stats  (views, score) VALUES
+INSERT INTO role (id, role_name) VALUES
+(1,  'USER'),
+(2,  'ADMIN');
+
+INSERT INTO user_role (user_id, role_id) VALUES
+(1,       1),
+(1,       2),
+(2,       1),
+(3,       1),
+(4,       1);
+
+    INSERT INTO article_stats  (views, score) VALUES
                             (0,	   100),
                             (545,  5500),
                             (33,   4400),

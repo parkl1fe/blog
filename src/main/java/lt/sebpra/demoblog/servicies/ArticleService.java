@@ -34,11 +34,11 @@ public class ArticleService {
     }
 
     public Page<Article> getAllByUser(String username, Pageable pageable) {
-        return articleRepository.findAllByUser_UserName(username, pageable);
+        return articleRepository.findAllByUser_Username(username, pageable);
     }
 
     public Article getArticle(String username, long articleId) {
-        return articleRepository.findByUser_UserNameAndId(username, articleId);
+        return articleRepository.findByUser_UsernameAndId(username, articleId);
     }
 
     @Transactional

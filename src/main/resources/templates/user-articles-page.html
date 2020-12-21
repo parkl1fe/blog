@@ -16,7 +16,7 @@
     <th:block
             th:with="homeUrl='/',
                  home=#{nav.home}">
-        <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}, {name:acc}}})}" ></div>
+        <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}, {name:acc.toUpperCase()}}})}" ></div>
     </th:block>
 
     <div class="d-grid">
@@ -50,7 +50,6 @@
 
     <!--Pagination-->
     <nav th:replace="fragments/table.html :: pagination(${articles})" ></nav>
-
 
 </main>
 

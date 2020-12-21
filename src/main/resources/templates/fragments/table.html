@@ -8,7 +8,6 @@
         <th th:text="#{table.header.score}" scope="col">Score</th>
         <th th:text="#{table.header.title} "scope="col">Title</th>
         <th th:text="#{table.header.author} "scope="col">Author</th>
-        <th scope="col">Handle</th>
     </tr>
     </thead>
     <tbody>
@@ -16,13 +15,11 @@
     <tr th:each="article : ${articles}">
         <td th:text="${article.articleStats.score}"></td>
         <td>
-            <a th:href="@{/{user}/article/{id}(user=${article.user.userName}, id=${article.id})}" th:text="${article.title}" ></a>
-            <span th:text="article.c" class="badge bg-primary rounded-pill ms-1"></span>
+            <a th:href="@{/{user}/article/{id}(user=${article.user.username}, id=${article.id})}" th:text="${article.title}" ></a>
         </td>
         <td>
-            <a th:href="@{/{user}(user=${article.user.userName})}" th:text="${article.user.userName}" ></a>
+            <a th:href="@{/{user}(user=${article.user.username})}" th:text="${article.user.username}" ></a>
         </td>
-        <td>@mdo</td>
     </tr>
 
     </tbody>
@@ -36,7 +33,7 @@
                th:href="@{?(page=${articles.hasPrevious ? articles.previousPageable.getPageNumber : articles.getNumber})}"
                aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
-                <span th:text="#{nav.next}" class="sr-only">Previous</span>
+                <span th:text="#{nav.previous}" class="sr-only">Previous</span>
             </a>
         </li>
         <th:block th:each="pageNumber : ${#numbers.sequence(1, articles.totalPages)}">

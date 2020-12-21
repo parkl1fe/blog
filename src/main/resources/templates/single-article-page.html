@@ -16,15 +16,15 @@
     <th:block
         th:with="homeUrl='/',
                  home=#{nav.home},
-                 userUrl='/'+ ${article.user.userName},
-                 userName=${article.user.userName},
+                 userUrl='/'+ ${article.user.username},
+                 username=${article.user.username.toUpperCase()},
                  articleName=${article.title.toUpperCase()}">
-        <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}, {name:userName, url:userUrl}, {name:articleName} }})}" ></div>
+        <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}, {name:username, url:userUrl}, {name:articleName} }})}" ></div>
     </th:block>
 
     <div class="d-grid gap-1">
-        <a th:href="@{/{username}/article/{id}/edit(username=${article.user.getUserName()}, id=${article.id})}" th:text="#{button.edit.article}" class="btn btn-info btn-lg fw-bold fs-2 text"></a>
-        <a th:href="@{/{username}/article/{id}/delete(username=${article.user.getUserName()}, id=${article.id})}" th:text="#{button.delete.article}" class="btn btn-info btn-lg fw-bold fs-2 text"></a>
+        <a th:href="@{/{username}/article/{id}/edit(username=${article.user.username}, id=${article.id})}" th:text="#{button.edit.article}" class="btn btn-info btn-lg fw-bold fs-2 text"></a>
+        <a th:href="@{/{username}/article/{id}/delete(username=${article.user.username}, id=${article.id})}" th:text="#{button.delete.article}" class="btn btn-info btn-lg fw-bold fs-2 text"></a>
     </div>
 
 </div>
@@ -47,10 +47,9 @@
         <div class="card">
             <img th:src="@{/uploads/image/{file}(file=${article.imageName})}" class="card-img-top" alt="image">
             <div class="card-body">
-                <strong th:text="${article.user.userName}"></strong>
+                <strong th:text="${article.user.username}"></strong>
                 <h5 th:text="${article.title}" class="card-title">Title</h5>
                 <p th:text="${article.getContent()}" class="card-text">Description</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
     </th:block>

@@ -14,7 +14,7 @@
     <th:block
             th:with="homeUrl='/',
                  home=#{nav.home}">
-        <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}}})}" ></div>
+        <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ { {name:home, url:homeUrl} } })}" ></div>
     </th:block>
 
 </div>

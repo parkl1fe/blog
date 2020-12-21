@@ -22,9 +22,9 @@
                 th:with="homeUrl='/',
                      home=#{nav.home},
                      userUrl='/'+ ${acc},
-                     userName=${acc},
+                     username=${acc},
                      currentPage=#{info.new.article}">
-            <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}, {name:userName, url:userUrl}, {name:currentPage}}})}" ></div>
+            <div th:replace="~{fragments/common.html :: breadcrumb(mapList = ${ {{name:home, url:homeUrl}, {name:username, url:userUrl}, {name:currentPage}}})}" ></div>
         </th:block>
     </div>
 

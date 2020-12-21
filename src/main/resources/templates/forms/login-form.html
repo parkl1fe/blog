@@ -1,0 +1,37 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Codeacademy homework blog">
+    <meta name="author" content="PranasS">
+    <title>My super cool blog</title>
+    <script th:src="@{http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js}"></script>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/login.css}" />
+    <script type="text/javascript" th:src="@{/js/login.js}"></script>
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="form">
+            <form class="register-form" th:method="POST" th:action="@{/}">
+                <input type="text" th:placeholder="#{form.username}"/>
+                <input type="password" th:placeholder="#{form.password}"/>
+                <button th:text="#{form.create}"></button>
+                <p th:text="#{form.q.registered}"class="message"></p>
+                <a class="message" href="#" th:text="#{form.signin}"></a>
+            </form>
+            <form class="login-form" th:method="POST" th:action="@{/user/login}">
+                <input type="text" name="username" th:placeholder="#{form.username}"/>
+                <input type="password" name="password" th:placeholder="#{form.password}"/>
+                <button th:text="#{form.login}"></button>
+                <p th:text="#{form.q.not.registered}" class="message"></p>
+                <a class="message" href="#" th:text="#{form.create.account}"></a>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

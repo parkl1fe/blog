@@ -7,8 +7,12 @@ CREATE TABLE user (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `avatar` varchar(255),
   `username` varchar(255) UNIQUE NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL
+);
+
+CREATE TABLE role (
+                      `id` bigint PRIMARY KEY AUTO_INCREMENT,
+                      `role_name` varchar(255) UNIQUE NOT NULL
 );
 
 CREATE TABLE `article` (
