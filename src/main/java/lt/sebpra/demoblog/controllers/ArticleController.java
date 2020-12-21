@@ -24,7 +24,7 @@ public class ArticleController {
     }
 
     @GetMapping()
-    public String getAllArticles(@PageableDefault(sort = "articleStats.score", direction = Direction.DESC, size = 3) Pageable pageable, Model model) {
+    public String getAllArticles(@PageableDefault(sort = "articleStats.score", direction = Direction.DESC, size = 5) Pageable pageable, Model model) {
         model.addAttribute("articles", articleService.getAll(pageable));
 
         return "front-page";
